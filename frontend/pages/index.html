@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sushant Neural Twin evidence workspace">
+  <title>Sushant Neural Twin</title>
+  <link rel="stylesheet" href="../styles/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <div class="brand">
+        <span class="brand-mark">SN</span>
+        <div>
+          <strong>Sushant</strong>
+          <span>Neural Twin</span>
+        </div>
+      </div>
+
+      <div class="workspace-label">Workspace</div>
+      <nav class="nav-list">
+        <button class="nav-item active" data-view="chat" type="button"><span class="nav-icon">+</span>Chat</button>
+        <button class="nav-item" data-view="profile" type="button"><span class="nav-icon">P</span>Profile</button>
+        <button class="nav-item" data-view="projects" type="button"><span class="nav-icon">/</span>Projects</button>
+        <button class="nav-item" data-view="graph" type="button"><span class="nav-icon">o</span>Knowledge graph</button>
+        <button class="nav-item" data-view="thoughts" type="button"><span class="nav-icon">~</span>Thought profile</button>
+        <button class="nav-item" data-view="recruiter" type="button"><span class="nav-icon">R</span>Recruiter mode</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="system-state"><span class="status-dot"></span><span>Local foundation</span></div>
+        <span class="version">Phase 14 / v0.1.0</span>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Evidence workspace</p>
+          <h1 id="view-title">Ask the twin</h1>
+        </div>
+        <div class="topbar-actions">
+          <span class="mode-chip"><span class="status-dot"></span>Local only</span>
+          <button class="icon-button" id="clear-session" type="button" title="Clear local session" aria-label="Clear local session">x</button>
+        </div>
+      </header>
+
+      <section class="view active" data-panel="chat">
+        <div class="chat-layout">
+          <div class="chat-panel panel">
+            <div class="panel-heading">
+              <div>
+                <span class="section-kicker">Conversation</span>
+                <h2>Ask a grounded question</h2>
+              </div>
+              <span class="quiet-badge">No source loaded</span>
+            </div>
+            <div class="message-list" id="message-list" aria-live="polite">
+              <div class="welcome-message">
+                <div class="welcome-mark">SN</div>
+                <div>
+                  <h3>Ready when the evidence is.</h3>
+                  <p>The assistant will answer from verified personal knowledge once source material is connected.</p>
+                </div>
+              </div>
+            </div>
+            <form class="chat-composer" id="chat-form">
+              <label class="sr-only" for="chat-input">Your question</label>
+              <textarea id="chat-input" rows="2" placeholder="Ask about a documented project, skill, or principle..."></textarea>
+              <div class="composer-footer">
+                <span>Answers remain source-aware</span>
+                <button class="primary-button" type="submit">Send <span aria-hidden="true">&#8594;</span></button>
+              </div>
+            </form>
+          </div>
+          <aside class="right-rail">
+            <div class="panel evidence-panel">
+              <div class="panel-heading compact">
+                <div><span class="section-kicker">Trace</span><h2>Evidence</h2></div>
+                <span class="count-badge">0</span>
+              </div>
+              <div class="empty-state small"><span class="empty-icon">+</span><p>Sources will appear here with every grounded answer.</p></div>
+            </div>
+            <div class="panel confidence-panel">
+              <div class="panel-heading compact"><div><span class="section-kicker">Signal</span><h2>Confidence</h2></div></div>
+              <div class="confidence-meter"><div class="meter-track"><span style="width: 0%"></span></div><strong>--</strong></div>
+              <p class="muted">No estimate until evidence is retrieved.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" data-panel="profile">
+        <div class="page-intro"><span class="section-kicker">Verified record</span><h2>Profile</h2><p>A professional snapshot assembled only from documented source material.</p></div>
+        <div class="empty-state large"><span class="empty-icon">P</span><h3>Profile data is not connected</h3><p>Add verified profile records to populate this view.</p></div>
+      </section>
+
+      <section class="view" data-panel="projects">
+        <div class="page-intro"><span class="section-kicker">Evidence library</span><h2>Projects</h2><p>Projects, responsibilities, technologies, and outcomes will be shown with their source references.</p></div>
+        <div class="empty-grid"><div class="empty-state large"><span class="empty-icon">/</span><h3>No projects loaded</h3><p>The project library is waiting for documented records.</p></div></div>
+      </section>
+
+      <section class="view" data-panel="graph">
+        <div class="page-intro"><span class="section-kicker">Relationships</span><h2>Knowledge graph</h2><p>Explicit entities and relationships will form a traceable map of the knowledge base.</p></div>
+        <div class="graph-canvas"><div class="graph-center"><span>SN</span><small>Awaiting entities</small></div><div class="graph-line line-one"></div><div class="graph-line line-two"></div><span class="graph-node node-one">Project</span><span class="graph-node node-two">Skill</span></div>
+      </section>
+
+      <section class="view" data-panel="thoughts">
+        <div class="page-intro"><span class="section-kicker">Documented thinking</span><h2>Thought profile</h2><p>Principles and decision patterns are shown only when explicitly documented.</p></div>
+        <div class="thought-layout"><div class="panel thought-panel"><div class="panel-heading compact"><div><span class="section-kicker">Patterns</span><h2>Thought themes</h2></div></div><div class="empty-state small"><span class="empty-icon">~</span><p>No documented thought patterns loaded.</p></div></div><div class="panel thought-panel"><div class="panel-heading compact"><div><span class="section-kicker">Evidence</span><h2>Recent statements</h2></div></div><div class="empty-state small"><span class="empty-icon">+</span><p>Statements will carry source and confidence metadata.</p></div></div></div>
+      </section>
+
+      <section class="view" data-panel="recruiter">
+        <div class="page-intro"><span class="section-kicker">Evidence mode</span><h2>Recruiter mode</h2><p>Create concise, source-backed profile summaries without unsupported claims.</p></div>
+        <div class="recruiter-layout"><div class="panel recruiter-panel"><div class="panel-heading compact"><div><span class="section-kicker">Summary</span><h2>Recruiter brief</h2></div><span class="quiet-badge">Pending</span></div><div class="empty-state small"><span class="empty-icon">R</span><p>Recruiter summaries become available after verified profile, project, experience, or skill records are loaded.</p></div></div><div class="panel recruiter-panel"><div class="panel-heading compact"><div><span class="section-kicker">Guardrails</span><h2>Evidence standard</h2></div></div><ul class="guardrail-list"><li><span>01</span>Source reference required</li><li><span>02</span>Unsupported claims withheld</li><li><span>03</span>Confidence remains visible</li></ul></div></div>
+      </section>
+    </main>
+  </div>
+  <script src="../components/app.js"></script>
+</body>
+</html>

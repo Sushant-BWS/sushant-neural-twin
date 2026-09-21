@@ -1,0 +1,10 @@
+[build-system]
+requires = []
+build-backend = "backend"
+
+[project]
+name = "sushant-neural-twin"
+version = "0.1.0"
+description = "Initial architecture for a personalized AI system."
+requires-python = ">=3.11"
+dependencies = []
