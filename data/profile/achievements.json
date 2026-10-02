@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "achievements": [
+      {
+        "id": "achievement_001",
+        "title": "Top 1% in Academics",
+        "category": "Academic",
+        "source": "resume",
+        "confidence": 1.0
+      },
+      {
+        "id": "achievement_002",
+        "title": "Microsoft Azure Fundamentals AZ-900 at 1st Attempt",
+        "category": "Certification",
+        "source": "resume",
+        "confidence": 1.0
+      },
+      {
+        "id": "achievement_003",
+        "title": "Technical Partner Pro Cloud Devops Badge",
+        "issuer": "Intel Corporation",
+        "category": "Cloud / DevOps",
+        "source": "resume",
+        "confidence": 1.0
+      },
+      {
+        "id": "achievement_004",
+        "title": "Cloud Security Badge",
+        "issuer": "Intel Corporation",
+        "category": "Cloud Security",
+        "source": "resume",
+        "confidence": 1.0
+      },
+      {
+        "id": "achievement_005",
+        "title": "Academic Rank 1",
+        "category": "Academic",
+        "description": "Entrusted by instructors to assist, educate, and advise during advanced Cloud and Cybersecurity sessions.",
+        "source": "resume",
+        "confidence": 1.0
+      }
+    ]
+  }
+]

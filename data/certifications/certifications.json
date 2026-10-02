@@ -1,1 +1,29 @@
-[]
+{
+  "certifications": [
+    {
+      "id": "certification_001",
+      "name": "Microsoft Azure Fundamentals AZ-900",
+      "issuer": "Microsoft",
+      "achievement": "Earned at 1st Attempt",
+      "source": "resume",
+      "source_document": "RESUME 02(1).pdf",
+      "confidence": 1.0
+    },
+    {
+      "id": "certification_002",
+      "name": "Cloud Computing",
+      "issuer": "IIT Kanpur",
+      "source": "resume",
+      "source_document": "RESUME 02(1).pdf",
+      "confidence": 1.0
+    },
+    {
+      "id": "certification_003",
+      "name": "Cyber Security and Forensics",
+      "issuer": "IIT Kanpur",
+      "source": "resume",
+      "source_document": "RESUME 02(1).pdf",
+      "confidence": 1.0
+    }
+  ]
+}

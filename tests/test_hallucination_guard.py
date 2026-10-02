@@ -70,6 +70,20 @@ class HallucinationGuardTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.guard.verify_claim("   ", self.evidence)
 
+    def test_clamps_negative_retrieval_scores(self) -> None:
+        weird = SearchResult(
+            document=KnowledgeDocument(
+                id="project-2",
+                content="Sushant is a software engineer.",
+                metadata={"source": "projects/projects.json#1"},
+            ),
+            score=-0.2,
+        )
+
+        verification = self.guard.verify_claim("Sushant is a software engineer.", [weird])
+        self.assertEqual(verification.status, ClaimStatus.VERIFIED)
+        self.assertGreaterEqual(verification.evidence[0].confidence, 0.0)
+
 
 if __name__ == "__main__":
     unittest.main()

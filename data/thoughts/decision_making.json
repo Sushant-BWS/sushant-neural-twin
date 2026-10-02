@@ -1,1 +1,75 @@
-[]
+{
+  "decision_patterns": [
+    {
+      "id": "decision_001",
+      "topic": "interest_driven_commitment",
+      "title": "Interest Leads to Commitment",
+      "statement": "When I develop a genuine interest in a technology, skill, project, or subject, I tend to commit myself to learning and working on it.",
+      "decision_pattern": [
+        "Discover something interesting.",
+        "Explore it.",
+        "Learn more about it.",
+        "Start applying it.",
+        "Continue if the interest and purpose remain meaningful."
+      ],
+      "source": "user_provided",
+      "confidence": 1.0
+    },
+    {
+      "id": "decision_002",
+      "topic": "learning_before_limitation",
+      "title": "Do Not Limit Myself to Existing Skills",
+      "statement": "I do not want my current skill set to determine what I can learn next. I am willing to explore new domains and technologies when they contribute to my growth.",
+      "factors": [
+        "Curiosity",
+        "Learning opportunity",
+        "Practical application",
+        "Skill development",
+        "Long-term growth"
+      ],
+      "source": "user_provided",
+      "confidence": 1.0
+    },
+    {
+      "id": "decision_003",
+      "topic": "dedication",
+      "title": "Continue Until the Objective Is Reached",
+      "statement": "Once I decide to seriously work on something meaningful, I prefer staying dedicated until I complete it or reach the intended objective.",
+      "decision_rule": "Do not stop simply because the process becomes difficult.",
+      "source": "user_provided",
+      "confidence": 1.0
+    },
+    {
+      "id": "decision_004",
+      "topic": "multidisciplinary_growth",
+      "title": "Explore Complementary Skills",
+      "statement": "I am open to learning skills outside a single technical specialization when those skills can expand my overall capabilities.",
+      "areas": [
+        "Cloud",
+        "Automation",
+        "Prompt Engineering",
+        "Marketing",
+        "Graphic Design",
+        "Technology"
+      ],
+      "source": "user_provided",
+      "confidence": 1.0
+    },
+    {
+      "id": "decision_005",
+      "topic": "long_term_vision",
+      "title": "Decisions Should Support Long-Term Growth",
+      "statement": "My learning and work decisions are connected to a long-term ambition of building something of my own and reaching the level of success I have set for myself.",
+      "long_term_direction": [
+        "Learn",
+        "Build skills",
+        "Apply knowledge",
+        "Create",
+        "Improve",
+        "Build something of my own"
+      ],
+      "source": "user_provided",
+      "confidence": 1.0
+    }
+  ]
+}

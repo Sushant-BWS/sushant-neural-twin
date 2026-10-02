@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "experiences": [
+      {
+        "id": "experience_001",
+        "organization_type": "EdTech startup",
+        "role": "Cloud Computing Intern",
+        "location": "Bengaluru, Karnataka",
+        "start_year": 2021,
+        "end_year": 2022,
+        "description": "Worked on securing an Azure-hosted learning portal so that only verified students and instructors could access sensitive course content.",
+        "responsibilities": [
+          "Categorized and assigned user roles for students, instructors, and admins.",
+          "Defined access scopes using role-based access control (RBAC).",
+          "Adapted role-based access control using Azure Active Directory."
+        ],
+        "technologies": [
+          "Microsoft Azure",
+          "Azure Active Directory",
+          "RBAC"
+        ],
+        "outcomes": [
+          "Secured 100% of critical endpoints in the student learning portal.",
+          "Reduced unauthorized access attempts by over 80% within the first two weeks."
+        ],
+        "source": "resume",
+        "source_document": "RESUME 02(1).pdf",
+        "confidence": 1.0
+      },
+      {
+        "id": "experience_002",
+        "organization": "Pristine Business Solutions",
+        "role": "Data and Research Analyst",
+        "employment_type": "Internship",
+        "location": "Noida, Uttar Pradesh, India",
+        "start_date": "2024-03",
+        "end_date": "2025-03",
+        "description": "Data and Research Analyst internship focused on business development and research activities.",
+        "responsibilities": [
+          "Worked on data and research activities.",
+          "Supported business development and research-related tasks."
+        ],
+        "skills": [
+          "Business Development",
+          "Business Strategy",
+          "Data Research"
+        ],
+        "source": "linkedin",
+        "source_document": "LinkedIn profile screenshot",
+        "confidence": 1.0
+      },
+      {
+        "id": "experience_003",
+        "organization": "Pristine Business Solutions",
+        "role": "Data Research Analyst",
+        "employment_type": "Full-time",
+        "location": "Noida Sector 68, Uttar Pradesh, India",
+        "start_date": "2024-11",
+        "end_date": "2025-07",
+        "description": "Data Research Analyst with a strategic focus on transforming raw data into actionable insights. Skilled in identifying, extracting, and analyzing key business data including company names and contact information.",
+        "responsibilities": [
+          "Transformed raw data into actionable business insights.",
+          "Identified key business data.",
+          "Extracted business data.",
+          "Analyzed company and contact information."
+        ],
+        "skills": [
+          "Data Analysis",
+          "Data Entry",
+          "Data Research"
+        ],
+        "source": "linkedin",
+        "source_document": "LinkedIn profile screenshot",
+        "confidence": 1.0
+      },
+      {
+        "id": "experience_004",
+        "organization": "Uniecops",
+        "role": "Data and Research Analyst Trainee",
+        "employment_type": "Internship",
+        "location": "Noida, Uttar Pradesh, India",
+        "start_date": "2025-07",
+        "end_date": "2026-02",
+        "description": "Worked with diverse data intelligence tools to extract meaningful insights about target companies, helping fuel informed business decisions and outreach.",
+        "responsibilities": [
+          "Used data intelligence tools for company research.",
+          "Extracted meaningful insights about target companies.",
+          "Supported informed business decisions and outreach."
+        ],
+        "skills": [
+          "Market Research",
+          "Research Skills",
+          "Data Intelligence"
+        ],
+        "source": "linkedin",
+        "source_document": "LinkedIn profile screenshot",
+        "confidence": 1.0
+      },
+      {
+        "id": "experience_005",
+        "organization": "Uniecops",
+        "role": "Executive Research-Analyst",
+        "employment_type": "Full-time",
+        "location": "Noida, Uttar Pradesh, India",
+        "start_date": "2026-02",
+        "end_date": null,
+        "status": "current",
+        "description": "Executive Research-Analyst role focused on research activities.",
+        "responsibilities": [
+          "Executive research and analysis."
+        ],
+        "skills": [
+          "Research Skills",
+          "Market Research"
+        ],
+        "source": "linkedin",
+        "source_document": "LinkedIn profile screenshot",
+        "confidence": 1.0
+      }
+    ]
+  }
+]

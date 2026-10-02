@@ -1,1 +1,59 @@
-[]
+{
+  "problem_solving_patterns": [
+    {
+      "id": "problem_001",
+      "topic": "persistence",
+      "title": "Stay With the Problem",
+      "statement": "When I am genuinely interested in something, I remain dedicated to it even when I face difficulties. I continue learning, experimenting, and working toward a solution instead of stopping midway.",
+      "behavior": [
+        "Understand the problem.",
+        "Learn what is necessary.",
+        "Experiment with possible solutions.",
+        "Keep improving the approach.",
+        "Continue until the work is completed or the objective is achieved."
+      ],
+      "core_belief": "Difficulties are part of the learning and problem-solving process.",
+      "source": "user_provided",
+      "confidence": 1.0
+    },
+    {
+      "id": "problem_002",
+      "topic": "learning_driven_problem_solving",
+      "title": "Learn What the Problem Requires",
+      "statement": "When I encounter something I do not understand, I use learning as part of solving the problem. I acquire the knowledge or skill required and then apply it practically.",
+      "process": [
+        "Identify what I do not know.",
+        "Learn the required concept.",
+        "Apply the new knowledge.",
+        "Experiment with the solution.",
+        "Improve the result."
+      ],
+      "source": "user_provided",
+      "confidence": 1.0
+    },
+    {
+      "id": "problem_003",
+      "topic": "completion",
+      "title": "Work Toward Completion",
+      "statement": "When I commit to something that interests me, I want to take it toward completion rather than leaving it unfinished without a meaningful reason.",
+      "rule": "Commitment should be followed by consistent effort toward completion.",
+      "source": "user_provided",
+      "confidence": 1.0
+    },
+    {
+      "id": "problem_004",
+      "topic": "continuous_improvement",
+      "title": "Improve Through Experimentation",
+      "statement": "I use experimentation and practical application to improve my understanding and capabilities.",
+      "cycle": [
+        "Try",
+        "Observe",
+        "Learn",
+        "Improve",
+        "Try again"
+      ],
+      "source": "user_provided",
+      "confidence": 1.0
+    }
+  ]
+}

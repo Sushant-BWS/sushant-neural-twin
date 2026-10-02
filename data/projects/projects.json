@@ -1,1 +1,61 @@
-[]
+{
+  "projects": [
+    {
+      "id": "project_001",
+      "name": "Grafana-Monitoring-Stack",
+      "category": "Cloud Monitoring / Observability",
+      "start_year": 2021,
+      "end_year": 2022,
+      "description": "Configured a Grafana monitoring stack on AWS EC2 to achieve real-time observability.",
+      "technologies": [
+        "AWS EC2",
+        "Grafana",
+        "Loki",
+        "Promtail",
+        "Node Exporter"
+      ],
+      "features": [
+        "Real-time observability",
+        "Custom Grafana dashboards",
+        "Alert rules",
+        "CPU monitoring",
+        "Memory monitoring",
+        "I/O bottleneck tracking"
+      ],
+      "outcomes": [
+        "Enabled proactive tracking of CPU, memory, and I/O bottlenecks.",
+        "Saved 30% in costs compared to paid monitoring tools."
+      ],
+      "source": "resume",
+      "source_document": "RESUME 02(1).pdf",
+      "confidence": 1.0
+    },
+    {
+      "id": "project_002",
+      "name": "Serverless Deployment on AWS",
+      "category": "Cloud / Serverless",
+      "start_year": 2022,
+      "end_year": 2023,
+      "description": "Implemented a fully serverless application using AWS Lambda, API Gateway, DynamoDB, and S3 to build a scalable and cost-efficient architecture.",
+      "technologies": [
+        "AWS Lambda",
+        "Amazon API Gateway",
+        "Amazon DynamoDB",
+        "Amazon S3",
+        "Amazon CloudWatch"
+      ],
+      "features": [
+        "Serverless application architecture",
+        "Real-time log monitoring"
+      ],
+      "outcomes": [
+        "Reduced troubleshooting time by 70% using CloudWatch monitoring.",
+        "Saved more than $2,500 annually in hosting and scaling costs.",
+        "Improved agility and uptime."
+      ],
+      "source": "resume",
+      "source_document": "RESUME 02(1).pdf",
+      "confidence": 1.0
+    }
+  ]
+}

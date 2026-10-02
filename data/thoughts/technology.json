@@ -1,1 +1,60 @@
-[]
+{
+  "technology_patterns": [
+    {
+      "id": "technology_001",
+      "topic": "technology_adoption",
+      "title": "Continuously Adopt New Technologies",
+      "statement": "I enjoy learning and adopting new technologies and skills. I do not want to restrict my growth to technologies I already know.",
+      "behavior": [
+        "Explore new technologies.",
+        "Learn their concepts.",
+        "Experiment with them.",
+        "Apply them in practical work.",
+        "Continue improving through practice."
+      ],
+      "source": "user_provided",
+      "confidence": 1.0
+    },
+    {
+      "id": "technology_002",
+      "topic": "automation",
+      "title": "Interest in Automation",
+      "statement": "I enjoy working with automation and finding smarter and more efficient ways to perform work.",
+      "interest": "Automation",
+      "mindset": "Build smarter processes instead of relying only on repetitive manual work.",
+      "source": "user_provided",
+      "confidence": 1.0
+    },
+    {
+      "id": "technology_003",
+      "topic": "multidisciplinary_technology",
+      "title": "Technology All-Rounder",
+      "statement": "I continuously build capabilities across multiple technical and creative areas. I see this multidisciplinary learning as part of becoming an all-rounder.",
+      "domains": [
+        "Cloud Computing",
+        "Automation",
+        "Prompt Engineering",
+        "Marketing",
+        "Graphic Design"
+      ],
+      "mindset": "I want to understand and work across complementary domains instead of limiting myself to one narrow skill.",
+      "source": "user_provided",
+      "confidence": 1.0
+    },
+    {
+      "id": "technology_004",
+      "topic": "technology_learning",
+      "title": "Technology Through Practical Experience",
+      "statement": "When I learn a new technology, I prefer gaining practical experience with it so that I can understand how it works beyond theory.",
+      "process": [
+        "Learn",
+        "Experiment",
+        "Build",
+        "Test",
+        "Improve"
+      ],
+      "source": "user_provided",
+      "confidence": 1.0
+    }
+  ]
+}

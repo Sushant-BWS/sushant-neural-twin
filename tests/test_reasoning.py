@@ -1,5 +1,6 @@
 """Tests for the Phase 9 evidence-based reasoning engine."""
 
+import json
 import unittest
 
 from backend.ai import (
@@ -68,6 +69,126 @@ class ReasoningEngineTests(unittest.TestCase):
         )
         self.assertIn("2 documented sources", response.reasoning_summary)
         self.assertIn("A documented skill.", response.answer)
+
+    def test_deduplicates_education_across_json_and_resume_sources(self) -> None:
+        education_record = json.dumps(
+            {
+                "degree": "Bachelor of Computer Application",
+                "institution": "IIMT University",
+                "location": "Meerut, Uttar Pradesh",
+                "start_year": 2021,
+                "end_year": 2024,
+                "achievements": [
+                    "Achieved Top 1% in Academics",
+                    "Participated in University Tech Events",
+                ],
+                "research_areas": [
+                    "Cloud Computing",
+                    "Cyber Security",
+                    "Forensics",
+                ],
+            }
+        )
+        resume_education = (
+            "Education: IIMT University Meerut, Uttar Pradesh "
+            "Bachelor of Computer Application 2021-2024 "
+            "Achieved Top 1% in Academics Participated in University Tech Events "
+            "Researched in Cloud Computing and Cyber Security and Forensics."
+        )
+
+        response = self.engine.reason(
+            ReasoningRequest(
+                question="Sushant education",
+                intent=ReasoningIntent.EDUCATION,
+            ),
+            facts=[
+                self.search_result(
+                    "education-json",
+                    education_record,
+                    "data/education/education.json",
+                    0.95,
+                ),
+                self.search_result(
+                    "resume-education",
+                    resume_education,
+                    "data/resume/Sushant_Resume.pdf",
+                    0.90,
+                ),
+            ],
+        )
+
+        self.assertTrue(response.sufficient_evidence)
+        self.assertEqual(response.evidence_count, 2)
+        self.assertEqual(
+            response.answer.count("Bachelor of Computer Application"),
+            1,
+        )
+        self.assertIn("Achieved Top 1% in Academics", response.answer)
+        self.assertNotIn("data/education/education.json", response.answer)
+        self.assertNotIn("data/resume/Sushant_Resume.pdf", response.answer)
+        self.assertNotIn("SUPPORTED", response.answer)
+        self.assertNotIn("VERIFIED", response.answer)
+        self.assertEqual(
+            {reference.source for reference in response.evidence},
+            {
+                "data/education/education.json",
+                "data/resume/Sushant_Resume.pdf",
+            },
+        )
+
+    def test_resume_project_section_replaces_multiple_duplicate_records(self) -> None:
+        json_serverless = (
+            "Serverless Deployment on AWS: Implemented a fully serverless "
+            "application using AWS Lambda, API Gateway, DynamoDB, and S3."
+        )
+        json_grafana = (
+            "Grafana-Monitoring-Stack: Configured a Grafana monitoring "
+            "stack on AWS EC2 to achieve real-time observability."
+        )
+        resume_projects = (
+            "Project: Grafana-Monitoring-Stack. 2021 2022 configured "
+            "Grafana monitoring stack on AWS EC2 with custom dashboards "
+            "and alert rules. Serverless Deployment on AWS 2022-2023 "
+            "implemented a scalable application with Lambda, API Gateway, "
+            "DynamoDB, and S3."
+        )
+
+        response = self.engine.reason(
+            ReasoningRequest(
+                question="Tell me about Sushant's projects.",
+                intent=ReasoningIntent.PROJECT,
+            ),
+            facts=[
+                self.search_result(
+                    "project-serverless",
+                    json_serverless,
+                    "data/projects/projects.json#serverless",
+                    0.95,
+                ),
+                self.search_result(
+                    "project-grafana",
+                    json_grafana,
+                    "data/projects/projects.json#grafana",
+                    0.94,
+                ),
+                self.search_result(
+                    "resume-projects",
+                    resume_projects,
+                    "data/resume/Sushant_Resume.pdf",
+                    0.90,
+                ),
+            ],
+        )
+
+        self.assertEqual(
+            response.answer.count("Grafana-Monitoring-Stack"),
+            1,
+        )
+        self.assertEqual(
+            response.answer.count("Serverless Deployment on AWS"),
+            1,
+        )
+        self.assertEqual(response.evidence_count, 3)
 
     def test_integrates_documented_thoughts(self) -> None:
         thought_engine = ThoughtEngine()

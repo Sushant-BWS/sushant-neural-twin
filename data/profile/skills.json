@@ -1,1 +1,40 @@
-[]
+{
+  "skills": [
+    {
+      "name": "SQL",
+      "category": "Technical",
+      "source": "resume",
+      "confidence": 1.0
+    },
+    {
+      "name": "Docker",
+      "category": "DevOps",
+      "source": "resume",
+      "confidence": 1.0
+    },
+    {
+      "name": "Kubernetes",
+      "category": "DevOps",
+      "source": "resume",
+      "confidence": 1.0
+    },
+    {
+      "name": "Ansible",
+      "category": "DevOps",
+      "source": "resume",
+      "confidence": 1.0
+    },
+    {
+      "name": "Jenkins CI/CD",
+      "category": "DevOps",
+      "source": "resume",
+      "confidence": 1.0
+    },
+    {
+      "name": "Linux",
+      "category": "Operating Systems",
+      "source": "resume",
+      "confidence": 1.0
+    }
+  ]
+}

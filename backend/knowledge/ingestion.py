@@ -28,7 +28,9 @@ class DataLoader:
         try:
             return json.loads(file_path.read_text(encoding="utf-8"))
         except JSONDecodeError as error:
-            raise ValueError(f"Invalid JSON in {file_path}: {error.msg}") from error
+            raise ValueError(
+                f"Invalid JSON in {file_path}: {error.msg}"
+            ) from error
 
     def json_files(self, directory: str | Path) -> list[Path]:
         """Return JSON files below a directory in deterministic order."""
@@ -44,11 +46,16 @@ class JsonValidator:
 
         if schema is None:
             return payload
+
         if isinstance(payload, list):
             return [schema.model_validate(item) for item in payload]
+
         if isinstance(payload, dict):
             return schema.model_validate(payload)
-        raise ValueError("Knowledge JSON must contain an object or an array")
+
+        raise ValueError(
+            "Knowledge JSON must contain an object or an array"
+        )
 
     def validate_file(
         self,
@@ -70,9 +77,19 @@ class TextNormalizer:
         """Serialize a value and collapse irrelevant whitespace."""
 
         if isinstance(value, BaseModel):
-            value = value.model_dump(mode="json", exclude_none=True)
+            value = value.model_dump(
+                mode="json",
+                exclude_none=True,
+            )
+
         if not isinstance(value, str):
-            value = json.dumps(value, ensure_ascii=False, sort_keys=True, default=str)
+            value = json.dumps(
+                value,
+                ensure_ascii=False,
+                sort_keys=True,
+                default=str,
+            )
+
         return self._whitespace.sub(" ", value).strip()
 
 
@@ -80,7 +97,11 @@ class MetadataExtractor:
     """Extract source metadata without inferring personal information."""
 
     def __init__(self, data_root: str | Path | None = None) -> None:
-        self.data_root = Path(data_root).resolve() if data_root else None
+        self.data_root = (
+            Path(data_root).resolve()
+            if data_root
+            else None
+        )
 
     def extract(
         self,
@@ -91,6 +112,7 @@ class MetadataExtractor:
         """Return source, content type, and optional record metadata."""
 
         source_path = Path(path).resolve()
+
         if self.data_root:
             try:
                 source = source_path.relative_to(self.data_root)
@@ -103,10 +125,13 @@ class MetadataExtractor:
             "source": source.as_posix(),
             "content_type": "application/json",
         }
+
         if record_index is not None:
             metadata["record_index"] = record_index
+
         if schema is not None:
             metadata["schema"] = schema.__name__
+
         return metadata
 
 
@@ -119,7 +144,9 @@ class DocumentParser:
         metadata_extractor: MetadataExtractor | None = None,
     ) -> None:
         self.normalizer = normalizer or TextNormalizer()
-        self.metadata_extractor = metadata_extractor or MetadataExtractor()
+        self.metadata_extractor = (
+            metadata_extractor or MetadataExtractor()
+        )
 
     def parse(
         self,
@@ -127,26 +154,114 @@ class DocumentParser:
         source_path: str | Path,
         schema: SchemaType | None = None,
     ) -> list[KnowledgeDocument]:
-        """Create one document per object in a JSON object or array."""
+        """
+        Create one document per knowledge record.
 
-        records = payload if isinstance(payload, list) else [payload]
+        Supported structures:
+
+        1. A single JSON object:
+           {"name": "Sushant"}
+
+        2. A JSON array:
+           [{"id": "1"}, {"id": "2"}]
+
+        3. A named collection:
+           {
+               "learning_patterns": [
+                   {...},
+                   {...}
+               ]
+           }
+
+        Named collections are flattened into individual documents while
+        preserving the collection name in metadata.
+        """
+
+        # ---------------------------------------------------------
+        # Case 1: Direct JSON array
+        # ---------------------------------------------------------
+        if isinstance(payload, list):
+            records = [
+                (None, record)
+                for record in payload
+            ]
+
+        # ---------------------------------------------------------
+        # Case 2: Named collection
+        #
+        # Example:
+        # {
+        #     "learning_patterns": [{...}, {...}],
+        #     "other_patterns": [{...}]
+        # }
+        #
+        # We only treat the object as a collection when ALL values
+        # are lists containing dictionaries.
+        #
+        # This prevents normal objects such as profile.json from
+        # accidentally being flattened.
+        # ---------------------------------------------------------
+        elif (
+            isinstance(payload, dict)
+            and payload
+            and all(
+                isinstance(value, list)
+                and all(
+                    isinstance(item, dict)
+                    for item in value
+                )
+                for value in payload.values()
+            )
+        ):
+            records = [
+                (collection_name, record)
+                for collection_name, collection in payload.items()
+                for record in collection
+            ]
+
+        # ---------------------------------------------------------
+        # Case 3: Single JSON object
+        # ---------------------------------------------------------
+        else:
+            records = [
+                (None, payload)
+            ]
+
         documents: list[KnowledgeDocument] = []
-        source = Path(source_path).as_posix()
-        is_collection = isinstance(payload, list)
 
-        for index, record in enumerate(records):
-            suffix = f"#{index}" if is_collection else ""
+        source = Path(source_path).as_posix()
+        multiple_records = len(records) > 1
+
+        for index, (collection_name, record) in enumerate(records):
+            metadata = self.metadata_extractor.extract(
+                source_path,
+                record_index=index if multiple_records else None,
+                schema=schema,
+            )
+
+            if collection_name:
+                metadata["collection"] = collection_name
+
+            # -----------------------------------------------------
+            # Generate a stable document ID.
+            # -----------------------------------------------------
+            if collection_name:
+                document_id = (
+                    f"{source}#{collection_name}:{index}"
+                )
+            elif multiple_records:
+                document_id = f"{source}#{index}"
+            else:
+                document_id = source
+
             documents.append(
                 KnowledgeDocument(
-                    id=f"{source}{suffix}",
+                    id=document_id,
                     content=self.normalizer.normalize(record),
-                    metadata=self.metadata_extractor.extract(
-                        source_path,
-                        record_index=index if is_collection else None,
-                        schema=schema,
-                    ),
+                    metadata=metadata,
                 )
             )
+
         return documents
 
 
@@ -171,43 +286,78 @@ class KnowledgeIngestionPipeline:
         """Ingest one JSON file into normalized documents."""
 
         raw_payload = self.loader.load_json(path)
-        validated_payload = self.validator.validate(raw_payload, schema)
-        return self.parser.parse(validated_payload, path, schema)
+
+        validated_payload = self.validator.validate(
+            raw_payload,
+            schema,
+        )
+
+        return self.parser.parse(
+            validated_payload,
+            path,
+            schema,
+        )
 
     def ingest_directory(
         self,
         directory: str | Path,
-        schema_resolver: SchemaResolver | Mapping[str, SchemaType] | None = None,
+        schema_resolver: SchemaResolver
+        | Mapping[str, SchemaType]
+        | None = None,
     ) -> list[KnowledgeDocument]:
         """Ingest all JSON files below a directory."""
 
         documents: list[KnowledgeDocument] = []
+
         for path in self.loader.json_files(directory):
-            schema = self._resolve_schema(path, schema_resolver)
-            documents.extend(self.ingest_file(path, schema))
+            schema = self._resolve_schema(
+                path,
+                schema_resolver,
+            )
+
+            documents.extend(
+                self.ingest_file(path, schema)
+            )
+
         return documents
 
     def ingest_to(
         self,
         paths: Iterable[str | Path],
         index: KnowledgeIndex,
-        schema_resolver: SchemaResolver | Mapping[str, SchemaType] | None = None,
+        schema_resolver: SchemaResolver
+        | Mapping[str, SchemaType]
+        | None = None,
     ) -> int:
         """Ingest files and add their documents to a supplied index."""
 
         documents: list[KnowledgeDocument] = []
+
         for path in paths:
-            schema = self._resolve_schema(Path(path), schema_resolver)
-            documents.extend(self.ingest_file(path, schema))
+            schema = self._resolve_schema(
+                Path(path),
+                schema_resolver,
+            )
+
+            documents.extend(
+                self.ingest_file(path, schema)
+            )
+
         return index.add(documents)
 
     @staticmethod
     def _resolve_schema(
         path: Path,
-        resolver: SchemaResolver | Mapping[str, SchemaType] | None,
+        resolver: SchemaResolver
+        | Mapping[str, SchemaType]
+        | None,
     ) -> SchemaType | None:
+        """Resolve an optional schema for a file."""
+
         if resolver is None:
             return None
+
         if callable(resolver):
             return resolver(path)
+
         return resolver.get(path.name)

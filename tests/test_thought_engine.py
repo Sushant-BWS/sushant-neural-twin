@@ -1,9 +1,13 @@
 """Tests for the Phase 7 documented thought engine."""
 
+import json
+from pathlib import Path
+import tempfile
 import unittest
 
 from backend.knowledge import EvidenceType, ThoughtEngine
 from backend.knowledge.schemas import Thought
+from backend.knowledge.thought_loader import ThoughtLoader
 
 
 class ThoughtEngineTests(unittest.TestCase):
@@ -83,6 +87,54 @@ class ThoughtEngineTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.engine.add_documented_thought(
                 Thought(topic="topic", statement="statement", source="")
+            )
+
+    def test_supports_loader_keyword_api(self) -> None:
+        result = self.engine.add_documented_thought(
+            topic="learning",
+            statement="Use small experiments to test assumptions.",
+            source="thoughts/learning.json#1",
+            confidence=0.7,
+            evidence=["learning.json#1"],
+            metadata={"source_file": "thoughts/learning.json"},
+        )
+
+        self.assertEqual(result.topic, "learning")
+        self.assertEqual(result.source, "thoughts/learning.json#1")
+        self.assertEqual(result.metadata["source_file"], "thoughts/learning.json")
+
+    def test_loader_preserves_topic_from_thought_json(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "learning.json"
+            source.write_text(
+                json.dumps(
+                    {
+                        "learning_patterns": [
+                            {
+                                "id": "learning_001",
+                                "topic": "continuous_learning",
+                                "statement": "Continuous learning guides my growth.",
+                                "source": "user_provided",
+                                "confidence": 0.95,
+                            }
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+            engine = ThoughtEngine()
+            loader = ThoughtLoader(engine=engine)
+
+            self.assertEqual(loader.load_file(source), 1)
+            self.assertEqual(
+                engine.thoughts()[0].topic,
+                "continuous_learning",
+            )
+            results = engine.search("continuous learning")
+            self.assertEqual(len(results), 1)
+            self.assertEqual(
+                results[0].thought.topic,
+                "continuous_learning",
             )
 
 

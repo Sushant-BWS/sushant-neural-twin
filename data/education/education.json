@@ -1,1 +1,25 @@
-[]
+{
+  "education": [
+    {
+      "id": "education_001",
+      "degree": "Bachelor of Computer Application",
+      "specialization": "",
+      "institution": "IIMT University",
+      "location": "Meerut, Uttar Pradesh",
+      "start_year": 2021,
+      "end_year": 2024,
+      "achievements": [
+        "Achieved Top 1% in Academics",
+        "Participated in University Tech Events"
+      ],
+      "research_areas": [
+        "Cloud Computing",
+        "Cyber Security",
+        "Forensics"
+      ],
+      "source": "resume",
+      "source_document": "RESUME 02(1).pdf",
+      "confidence": 1.0
+    }
+  ]
+}

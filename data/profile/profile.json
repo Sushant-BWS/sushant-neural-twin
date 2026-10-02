@@ -1,1 +1,19 @@
-{}
+{
+  "id": "profile_001",
+  "name": "Sushant Mishra",
+  "professional_title": "Aspiring DevOps Engineer",
+  "professional_summary": "Aspiring DevOps Engineer who has implemented automation, configured secure cloud workflows, and streamlined deployment processes through consistent hands-on practice. Managed infrastructure tasks, monitored performance, and optimized operations to support scalable, reliable system environments.",
+  "career_focus": [
+    "DevOps",
+    "Cloud Computing",
+    "Cyber Security"
+  ],
+  "achievements": [
+    "Achieved Top 1% in Academics",
+    "Participated in University Tech Events",
+    "Researched in Cloud Computing and Cyber Security and Forensics"
+  ],
+  "source": "resume",
+  "source_document": "RESUME 02(1).pdf",
+  "confidence": 1.0
+}

@@ -1,1 +1,104 @@
-[]
+{
+  "learning_patterns": [
+    {
+      "id": "learning_001",
+      "topic": "continuous_learning",
+      "title": "Daily Learning Is My Strength",
+      "statement": "I consider daily learning one of my biggest strengths. I continuously learn new technologies, skills, concepts, and tools and try to apply what I learn through practical work.",
+      "mindset": "I do not want to stop learning. Every new concept I understand adds to my knowledge and expands what I am capable of doing.",
+      "daily_behavior": [
+        "Learn something new every day.",
+        "Explore new technologies and skills.",
+        "Apply newly learned concepts through practical work.",
+        "Experiment with what I learn.",
+        "Continue improving existing skills while learning new ones."
+      ],
+      "core_belief": "Continuous learning is the foundation of my personal and professional growth.",
+      "strength": "Daily learning",
+      "source": "user_provided",
+      "confidence": 1.0
+    },
+    {
+      "id": "learning_002",
+      "topic": "learning_by_doing",
+      "title": "Learn and Apply",
+      "statement": "I prefer turning new knowledge into practical work instead of keeping it only as theoretical knowledge.",
+      "learning_cycle": [
+        "Discover",
+        "Learn",
+        "Experiment",
+        "Apply",
+        "Understand",
+        "Improve"
+      ],
+      "core_belief": "Practical application helps me gain deeper knowledge.",
+      "source": "user_provided",
+      "confidence": 1.0
+    },
+    {
+      "id": "learning_003",
+      "topic": "persistence_in_learning",
+      "title": "Keep Learning Until I Understand",
+      "statement": "When I become interested in a technology, concept, or skill, I remain dedicated to learning it until I understand it properly or complete what I started.",
+      "behavior": [
+        "Follow my interest.",
+        "Continue learning when challenges appear.",
+        "Research what I do not understand.",
+        "Experiment repeatedly.",
+        "Stay focused until I reach completion or understanding."
+      ],
+      "core_belief": "Interest starts my learning journey, while dedication takes it toward completion.",
+      "source": "user_provided",
+      "confidence": 1.0
+    },
+    {
+      "id": "learning_004",
+      "topic": "multidisciplinary_learning",
+      "title": "Learn Across Multiple Domains",
+      "statement": "I continuously develop knowledge across different domains instead of limiting myself to a single area.",
+      "domains": [
+        "Cloud Computing",
+        "Automation",
+        "Prompt Engineering",
+        "Marketing",
+        "Graphic Design",
+        "Technology",
+        "AI and emerging technologies"
+      ],
+      "mindset": "Learning across different domains helps me become an all-rounder.",
+      "source": "user_provided",
+      "confidence": 1.0
+    },
+    {
+      "id": "learning_005",
+      "topic": "knowledge_growth",
+      "title": "Every New Concept Adds Knowledge",
+      "statement": "I believe that every new concept, technology, or skill I learn adds another layer to my overall knowledge and capability.",
+      "behavior": [
+        "Keep discovering.",
+        "Keep learning.",
+        "Keep practicing.",
+        "Connect new knowledge with existing knowledge."
+      ],
+      "core_belief": "My knowledge should continue expanding day by day.",
+      "source": "user_provided",
+      "confidence": 1.0
+    },
+    {
+      "id": "learning_006",
+      "topic": "long_term_growth",
+      "title": "Learning Supports My Long-Term Vision",
+      "statement": "I see continuous learning and skill development as important steps toward building something of my own and reaching the level of success I have set for myself.",
+      "long_term_vision": "Build my own independent professional and entrepreneurial ecosystem.",
+      "connection": [
+        "Learning",
+        "Skill development",
+        "Practical application",
+        "Execution",
+        "Long-term growth"
+      ],
+      "source": "user_provided",
+      "confidence": 1.0
+    }
+  ]
+}

@@ -98,6 +98,13 @@ class SecurityMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next: Callable[..., Awaitable[Response]]) -> Response:
         """Process one request without logging credentials or request bodies."""
 
+        origin = request.headers.get("origin")
+        if request.method == "OPTIONS":
+            response = Response(status_code=status.HTTP_200_OK)
+            self._add_cors_headers(response, origin)
+            self._add_security_headers(response)
+            return response
+
         client_id = request.client.host if request.client else "unknown"
         if not self.rate_limiter.allow(client_id):
             response = JSONResponse(
@@ -122,6 +129,7 @@ class SecurityMiddleware(BaseHTTPMiddleware):
         else:
             response = await call_next(request)
 
+        self._add_cors_headers(response, origin)
         self._add_security_headers(response)
         logger.info("request method=%s path=%s status=%s", request.method, request.url.path, response.status_code)
         return response
@@ -130,6 +138,16 @@ class SecurityMiddleware(BaseHTTPMiddleware):
         return self.configured_settings.AUTH_ENABLED and request.url.path.startswith(
             self.configured_settings.API_PREFIX
         )
+
+    def _add_cors_headers(self, response: Response, origin: str | None) -> None:
+        if not origin:
+            return
+        allowed_origins = set(self.configured_settings.cors_origins)
+        if origin in allowed_origins or origin.startswith("http://localhost:") or origin.startswith("http://127.0.0.1:"):
+            response.headers.setdefault("access-control-allow-origin", origin)
+            response.headers.setdefault("access-control-allow-methods", "GET, POST, PUT, DELETE, OPTIONS")
+            response.headers.setdefault("access-control-allow-headers", "Authorization, Content-Type, Origin, Accept")
+            response.headers.setdefault("access-control-allow-credentials", "true")
 
     @staticmethod
     def _add_security_headers(response: Response) -> None:
